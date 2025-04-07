@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+public class Main {
+    private double totalHarga;
+    private String metodePembayaran;
+    private String statusPembayaran;
+
+    public Main(double totalHarga) {
+        this.totalHarga = totalHarga;
+    }
+
+    public void prosesPembayaran(String metode) {
+        if (metode.equalsIgnoreCase("Kartu Kredit")) {
+            metodePembayaran = "Kartu Kredit";
+            statusPembayaran = "Pembayaran Berhasil dengan Kartu Kredit";
+        } else if (metode.equalsIgnoreCase("Transfer Bank")) {
+            metodePembayaran = "Transfer Bank";
+            statusPembayaran = "Pembayaran Berhasil dengan Transfer Bank";
+        }
+    }
+
+    public double prosesPembayaran(String metode, double persenDiskon) {
+        if (metode.equalsIgnoreCase("Voucher")) {
+            metodePembayaran = "Voucher Diskon";
+            double diskon = totalHarga * (persenDiskon / 100);
+            totalHarga -= diskon;
+            statusPembayaran = "Pembayaran Berhasil dengan Voucher Diskon";
+        }
+        return totalHarga;
+    }
+
+    public void tampilkanDetailPembayaran() {
+        System.out.println("Metode Pembayaran: " + metodePembayaran);
+        System.out.println("Status Pembayaran: " + statusPembayaran);
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // TEST CASE SITI
+        System.out.println("=== Test Case 1: Siti ===");
+        Main siti = new Main(3500000);
+        System.out.println("Total Harga Sebelum Diskon: Rp " + (int)siti.totalHarga);
+        siti.prosesPembayaran("Kartu Kredit");
+        siti.tampilkanDetailPembayaran();
+        System.out.println();
+
+        // TEST CASE CICIRIPI
+        System.out.println("=== Test Case 2: Ciciripi ===");
+        Main ciciripi = new Main(10000000);
+        System.out.println("Total Harga Sebelum Diskon: Rp " + (int)ciciripi.totalHarga);
+        double hargaDiskon = ciciripi.prosesPembayaran("Voucher", 15);
+        System.out.println("Total Harga Setelah Diskon: Rp " + (int)hargaDiskon);
+        ciciripi.tampilkanDetailPembayaran();
+        System.out.println();
+
+        // TEST CASE ASNAWI
+        System.out.println("=== Test Case 3: Asnawi ===");
+        Main asnawi = new Main(1200000);
+        System.out.println("Total Harga Sebelum Diskon: Rp " + (int)asnawi.totalHarga);
+        asnawi.prosesPembayaran("Transfer Bank");
+        asnawi.tampilkanDetailPembayaran();
+        System.out.println();
+
+        // INPUT MANUAL
+        System.out.println("=== Input Manual Pengguna ===");
+        System.out.print("Masukkan nama pelanggan: ");
+        String nama = input.nextLine();
+
+        System.out.print("Masukkan total harga: Rp ");
+        double harga = input.nextDouble();
+        input.nextLine(); // Buang newline
+
+        System.out.print("Masukkan metode pembayaran (Kartu Kredit / Transfer Bank / Voucher): ");
+        String metode = input.nextLine();
+
+        Main user = new Main(harga);
+        System.out.println("Total Harga Sebelum Diskon: Rp " + (int)harga);
+
+        if (metode.equalsIgnoreCase("Voucher")) {
+            System.out.print("Masukkan persen diskon: ");
+            double diskon = input.nextDouble();
+            double hargaAkhir = user.prosesPembayaran(metode, diskon);
+            System.out.println("Total Harga Setelah Diskon: Rp " + (int)hargaAkhir);
+        } else {
+            user.prosesPembayaran(metode);
+        }
+
+        user.tampilkanDetailPembayaran();
+        input.close();
+    }
+}
