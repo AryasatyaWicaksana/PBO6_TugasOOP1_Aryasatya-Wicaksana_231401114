@@ -32,3 +32,6 @@ Status Pembayaran: Pembayaran Berhasil dengan Voucher Diskon
 Total Harga Sebelum Diskon: Rp 1.200.000 <br>
 Metode Pembayaran: Transfer Bank <br>
 Status Pembayaran: Pembayaran Berhasil dengan Transfer Bank
+
+### Output Program
+![image alt](https://github.com/AryasatyaWicaksana/PBO6_TugasOOP1_Aryasatya-Wicaksana_231401114/blob/8220b35679539855a1cc2aca80c4b05fb3db47f9/Screenshot%20Output%20Program.png)
